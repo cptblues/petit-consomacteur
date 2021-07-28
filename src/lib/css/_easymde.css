@@ -1,0 +1,9 @@
+@import 'easymde/dist/easymde.min.css';
+
+.EasyMDEContainer {
+  width: 100%;
+}
+
+.editor-preview {
+  width: 100%;
+}

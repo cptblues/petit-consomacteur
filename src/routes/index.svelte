@@ -1,32 +1,60 @@
 <script context="module" lang="ts">
-	export const prerender = true;
+	export const prerender = false;
+	export const ssr = false;
 </script>
-
 <script lang="ts">
-	import Counter from '$lib/Counter.svelte';
+	import { onMount } from "svelte";
+  import { browser } from "$app/env";
+	import showdown from "showdown";
+
+  let markdownComponent;
+
+  if (browser) {
+    onMount(async () => {
+      markdownComponent = (await import("$lib/Markdown.svelte")).default;
+    });
+  }
+
+	let preview = '';
+	function convertMarkdown(ev: CustomEvent) {
+		const converter = new showdown.Converter();
+		preview = converter.makeHtml(ev.detail);
+	}
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Petit-Consomacteur</title>
 </svelte:head>
 
 <section>
 	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</div>
-
-		to your new<br />SvelteKit app
+		Bienvenue petit consomacteur !
 	</h1>
 
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
+	<div class="block">
+		Explication ici
+	</div>
+	
+	<div class="block">
+		Options à paramétrer ici
+	</div>
 
-	<Counter />
+	<div class="block">
+		<textarea id="markdown"></textarea>	
+		{#if markdownComponent}
+			<svelte:component on:easyChange={(event) => { convertMarkdown(event); }} this={markdownComponent} />
+		{/if}
+	</div>
+
+	<div class="block">
+		<div class="editor-preview">
+			{@html preview }
+		</div>
+	</div>
+
+	<div class="block">
+		Sauvegarder sa page ici
+	</div>
 </section>
 
 <style>
@@ -38,22 +66,17 @@
 		flex: 1;
 	}
 
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
+	.block {
+		display: flex;
+		background-color: white;
 		width: 100%;
 		height: 100%;
-		top: 0;
-		display: block;
+		margin: 12px;
+		padding: 24px;
+		border-radius: 5px;
 	}
+
+	.EasyMDEContainer {
+    width: 100%;
+  }
 </style>
