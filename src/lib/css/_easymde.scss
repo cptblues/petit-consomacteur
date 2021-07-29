@@ -1,0 +1,32 @@
+@import 'easymde/dist/easymde.min.css';
+
+.EasyMDEContainer {
+  width: 100%;
+}
+
+.align_left { text-align: left; }
+.align_right { text-align: right; }
+.align_center { text-align: center; }
+
+.custom-preview {
+  width: 100%;
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.8rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.3rem; }
+  h5 { font-size: 1rem; }
+  blockquote {
+    padding: 4px;
+    background-color: grey;
+  }
+
+  ul > li {
+    list-style: circle;
+  }
+
+  ol > li {
+    list-style: decimal;
+  }
+}
+ 

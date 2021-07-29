@@ -2,25 +2,6 @@
 	export const prerender = false;
 	export const ssr = false;
 </script>
-<script lang="ts">
-	import { onMount } from "svelte";
-  import { browser } from "$app/env";
-	import showdown from "showdown";
-
-  let markdownComponent;
-
-  if (browser) {
-    onMount(async () => {
-      markdownComponent = (await import("$lib/Markdown.svelte")).default;
-    });
-  }
-
-	let preview = '';
-	function convertMarkdown(ev: CustomEvent) {
-		const converter = new showdown.Converter();
-		preview = converter.makeHtml(ev.detail);
-	}
-</script>
 
 <svelte:head>
 	<title>Petit-Consomacteur</title>
@@ -36,20 +17,23 @@
 	</div>
 	
 	<div class="block">
-		Options à paramétrer ici
+		Alignement :
+		<select name="alignment" id="alignment">
+			<option value="left">Gauche</option>
+			<option value="center">Centre</option>
+			<option value="right">Droite</option>
+		</select>
 	</div>
 
 	<div class="block">
 		<textarea id="markdown"></textarea>	
 		{#if markdownComponent}
-			<svelte:component on:easyChange={(event) => { convertMarkdown(event); }} this={markdownComponent} />
+			<svelte:component on:easyChange={convertToHtml} this={markdownComponent} />
 		{/if}
 	</div>
 
 	<div class="block">
-		<div class="editor-preview">
-			{@html preview }
-		</div>
+		<div id="preview" class="custom-preview">{@html preview}</div>
 	</div>
 
 	<div class="block">
@@ -57,11 +41,7 @@
 	</div>
 </section>
 
-<style>
-	h1 {
-		font-size: 1.5rem;
-		font-weight: 600;
-	}
+<style lang="scss">
 
 	section {
 		display: flex;
@@ -82,7 +62,51 @@
 		border-radius: 5px;
 	}
 
-	.EasyMDEContainer {
-    width: 100%;
-  }
 </style>
+
+<script lang="ts">
+	import { onMount } from "svelte";
+  import { browser } from "$app/env";
+	import showdown from "showdown";
+
+  let markdownComponent;
+
+  if (browser) {
+    onMount(async () => {
+      markdownComponent = (await import("$lib/Markdown.svelte")).default;
+
+			const alignment = <HTMLInputElement>document.getElementById('alignment');
+			const previewZone = <HTMLInputElement>document.getElementById('preview');
+
+			if (alignment) {
+				alignment.addEventListener('change', function() {
+					const value = this.value;
+					if(value === 'left') {
+						previewZone.classList.remove('align_right')
+						previewZone.classList.remove('align_center')
+						previewZone.classList.add('align_left');
+					}
+					else if(value === 'right') {
+						previewZone.classList.remove('align_left')
+						previewZone.classList.remove('align_center')
+						previewZone.classList.add('align_right');
+					}
+					else if(value === 'center') {
+						previewZone.classList.remove('align_right')
+						previewZone.classList.remove('align_left')
+						previewZone.classList.add('align_center');
+					}
+				});
+			}
+    });
+  }
+
+	let preview = '';
+	function convertToHtml(ev: CustomEvent) {
+		const converter = new showdown.Converter();
+		converter.setOption('completeHTMLDocument', true);
+		converter.setOption('simpleLineBreaks', true);
+		preview = converter.makeHtml(ev.detail);
+	}
+	
+</script>

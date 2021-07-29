@@ -12,7 +12,7 @@
 		</ul>
 	</nav>
 	<div class="cornet">
-		Profile
+		<a href="/profile">Profile</a>
 	</div>
 </header>
 
