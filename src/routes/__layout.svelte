@@ -1,18 +1,16 @@
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
+	import Footer from '$lib/Footer.svelte';
 	import '../app.css';
 	import '../styles/tailwind-output.css';
 </script>
 
-<Header />
-
 <main>
+	<Header />
 	<slot />
 </main>
 
-<footer>
-	<p>Footer</p>
-</footer>
+<Footer />
 
 <style>
 	main {
@@ -21,7 +19,7 @@
 		flex-direction: column;
 		padding: 1rem;
 		width: 100%;
-		max-width: 1024px;
+		max-width: 1200px;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}
@@ -32,10 +30,6 @@
 		justify-content: center;
 		align-items: center;
 		padding: 40px;
-	}
-
-	footer a {
-		font-weight: bold;
 	}
 
 	@media (min-width: 480px) {

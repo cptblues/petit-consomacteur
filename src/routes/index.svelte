@@ -58,12 +58,18 @@
 </section>
 
 <style>
+	h1 {
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		flex: 1;
+		margin-top: 100px;
 	}
 
 	.block {
