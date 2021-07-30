@@ -17,22 +17,33 @@
 	</div>
 	
 	<div class="block">
-		Alignement :
-		<select name="alignment" id="alignment">
-			<option value="left">Gauche</option>
-			<option value="center">Centre</option>
-			<option value="right">Droite</option>
-		</select>
+		<div class="flex flex-row justify-between w-full">
+			<div class="flex flex-col">
+				Alignement du texte:
+				<select name="alignment" id="alignment">
+					<option value="left">Gauche</option>
+					<option value="center">Centre</option>
+					<option value="right">Droite</option>
+				</select>
+
+				Couleur des titres :
+			</div>
+			<div class="flex flex-col">
+				<div>Couleur du texte : </div>
+				<div>Couleur de fond : </div>
+			</div>
+		</div>
+		
+
+		
 	</div>
 
 	<div class="block">
+		<div class="flex flex-row"></div>
 		<textarea id="markdown"></textarea>	
 		{#if markdownComponent}
 			<svelte:component on:easyChange={convertToHtml} this={markdownComponent} />
 		{/if}
-	</div>
-
-	<div class="block">
 		<div id="preview" class="custom-preview">{@html preview}</div>
 	</div>
 

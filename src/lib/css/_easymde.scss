@@ -1,7 +1,33 @@
 @import 'easymde/dist/easymde.min.css';
 
 .EasyMDEContainer {
-  width: 100%;
+  width: 50%;
+  height: auto;
+  min-height: 150px;
+  border-right: 1px solid var(--peach-dark);
+  z-index: 1;
+}
+
+.CodeMirror .cm-spell-error {
+	background:none !important;
+}
+
+.CodeMirror,
+.editor-toolbar {
+	border:none !important;
+	border-radius:none !important;
+}
+
+.editor-toolbar {
+	border-bottom:1px solid var(--peach-dark) !important;
+}
+
+.codeMirror,
+.CodeMirror pre,
+.CodeMirror-line,
+.CodeMirror-code {
+	font-size:15px !important;
+	font-weight:400 !important;
 }
 
 .align_left { text-align: left; }
@@ -9,7 +35,9 @@
 .align_center { text-align: center; }
 
 .custom-preview {
-  width: 100%;
+  width: 50%;
+  background-size: contain;
+  padding: 14px;
 
   h1 { font-size: 2rem; }
   h2 { font-size: 1.8rem; }
@@ -21,12 +49,34 @@
     background-color: grey;
   }
 
-  ul > li {
-    list-style: circle;
+  ul {
+    margin:0;
+    margin-top:7px;
+    padding-left:42px;
+    font-weight:700;
+    
+    li {
+      list-style:none;
+      line-height:2;
+
+      p {
+        margin: 0;
+      }
+
+      li {
+        margin:0;
+        font-size:14px;
+        font-weight:400;
+      }
+    }
   }
 
   ol > li {
     list-style: decimal;
+  }
+
+  p {
+    margin: 12px 0;
   }
 }
  

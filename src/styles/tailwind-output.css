@@ -589,11 +589,26 @@ video {
 .hidden {
 	display: none;
 }
+.w-full {
+	width: 100%;
+}
 .transform {
 	transform: var(--tw-transform);
 }
+.flex-row {
+	flex-direction: row;
+}
+.flex-col {
+	flex-direction: column;
+}
+.justify-between {
+	justify-content: space-between;
+}
 .border {
 	border-width: 1px;
+}
+.italic {
+	font-style: italic;
 }
 .drop-shadow {
 	--tw-drop-shadow: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06));
